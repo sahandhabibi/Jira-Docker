@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  jira:
+    image: atlassian/jira-software
+    container_name: jira
+    privileged: true
+    restart: always
+    ports:
+      - '80:8080'
+    environment:
+      - JVM_MAXIMUM_MEMORY=8000m
+      - JVM_MINIMUM_MEMORY=1000m
+      - JVM_SUPPORT_RECOMMENDED_ARGS= -Dmail.imap.starttls.enable=true
+      - HTTP_PROXY=
+      - HTTPS_PROXY=
+      - NO_PROXY=""
+    volumes:
+      - jira_data:/var/atlassian/application-data/jira
+      - ./jars/atlassian-extras-3.2.jar:/opt/atlassian/jira/atlassian-jira/WEB-INF/lib/atlassian-extras-3.2.jar:ro
+      - ./jars/atlassian-universal-plugin-manager-plugin-4.0.4.jar:/opt/atlassian/jira/atlassian-jira/WEB-INF/atlassian-bundled-plugins/atlassian-universal-plugin-manager-plugin-4.0.8.jar:ro
+volumes:
+  jira_data:
+    external: false
