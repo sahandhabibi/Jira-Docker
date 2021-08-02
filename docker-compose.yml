@@ -2,7 +2,7 @@ version: '2'
 
 services:
   jira:
-    image: atlassian/jira-software
+    image: atlassian/jira-software:8.8.0-RC02-ubuntu-jdk11
     container_name: jira
     privileged: true
     restart: always
